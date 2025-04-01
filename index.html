@@ -4,116 +4,565 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minimercado Online</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
+    <!-- Skip link para acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+    <!-- Controles de acessibilidade -->
+    <div class="font-size-controls" role="group" aria-label="Controles de acessibilidade">
+        <button id="increase-font" aria-label="Aumentar fonte">A+</button>
+        <button id="decrease-font" aria-label="Diminuir fonte">A-</button>
+        <button id="reset-font" aria-label="Restaurar fonte">A</button>
+        <button id="contrast-toggle" aria-label="Alternar alto contraste"><i class="bi bi-circle-half"></i></button>
+    </div>
+
     <!-- Cabeçalho -->
     <header>
-        <h1>Minimercado Online</h1>
-        <nav>
-            <ul>
-                <li><a href="#frutas-e-verduras">Frutas e Verduras</a></li>
-                <li><a href="#produtos-alimenticios">Produtos Alimentícios</a></li>
-                <li><a href="#produtos-de-higiene">Produtos de Higiene</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>Minimercado Online</h1>
+            <p>Seu mercado de confiança, agora na internet!</p>
+            <div id="clock" class="mb-3" aria-live="polite" aria-label="Relógio">00:00:00</div>
+            <nav aria-label="Navegação principal">
+                <ul>
+                    <li><a href="#frutas-e-verduras">Frutas e Verduras</a></li>
+                    <li><a href="#produtos-alimenticios">Produtos Alimentícios</a></li>
+                    <li><a href="#produtos-de-higiene">Produtos de Higiene</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="#meus-agendamentos">Meus Agendamentos</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <hr>
+    <!-- Carrossel Bootstrap de promoções -->
+    <div id="carouselPromocoes" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="5" aria-label="Slide 6"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="6" aria-label="Slide 7"></button>
+            <button type="button" data-bs-target="#carouselPromocoes" data-bs-slide-to="7" aria-label="Slide 8"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./img/frutas-e-verduras/banana.webp" class="d-block w-100" alt="Promoção de bananas - Cachos de bananas amarelas maduras em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Promoção de Bananas</h3>
+                    <p>Banana madura e fresca por apenas R$ 2,50/kg!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/produtos-alimenticios-nao-pereciveis/arroz-branco-tipo-1-camil.jpg" class="d-block w-100" alt="Promoção de arroz - Pacote de arroz branco tipo 1 em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Promoção de Arroz</h3>
+                    <p>Arroz branco tipo 1 por apenas R$ 4,99/kg!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/produtos-de-higiene-e-limpeza/sabonete-perfumado-lavanda-siene.png" class="d-block w-100" alt="Promoção de sabonetes - Sabonetes perfumados de lavanda em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Promoção de Sabonetes</h3>
+                    <p>Leve 3, pague 2! Sabonetes perfumados por apenas R$ 3,00!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/frutas-e-verduras/maca.png" class="d-block w-100" alt="Promoção de maçãs - Maçãs vermelhas brilhantes em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Maçãs em Promoção</h3>
+                    <p>Maçãs frescas e suculentas por apenas R$ 5,99/kg!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/produtos-alimenticios-nao-pereciveis/cafe.png" class="d-block w-100" alt="Promoção de café - Pacote de café torrado e moído em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Café com Desconto</h3>
+                    <p>Café torrado e moído, pacote de 500g por apenas R$ 8,90!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/produtos-de-higiene-e-limpeza/papel-higienico.png" class="d-block w-100" alt="Promoção de papel higiênico - Pacote com 12 rolos em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Papel Higiênico em Oferta</h3>
+                    <p>Pacote com 12 rolos por apenas R$ 15,90! Aproveite!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/frutas-e-verduras/tomate.png" class="d-block w-100" alt="Promoção de tomates - Tomates vermelhos maduros em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Tomates Frescos</h3>
+                    <p>Tomates selecionados por apenas R$ 4,50/kg!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./img/produtos-alimenticios-nao-pereciveis/macarrao.png" class="d-block w-100" alt="Promoção de macarrão - Pacote de macarrão espaguete em oferta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Macarrão em Promoção</h3>
+                    <p>Macarrão espaguete, pacote de 500g por apenas R$ 3,49!</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPromocoes" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPromocoes" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+    </div>
 
     <!-- Corpo das Páginas -->
-    <main>
+    <main id="main-content" class="container">
         <!-- Frutas e Verduras -->
-        <section id="frutas-e-verduras">
+        <section id="frutas-e-verduras" class="fade-in">
             <h2>Frutas e Verduras</h2>
-            <article>
-                <img src="./img/frutas-e-verduras/banana.webp" alt="Banana" width="200" height="200">
-                <h3>Banana</h3>
-                <p><strong>Descrição: </strong>Banana madura e fresca.</p>
-                <p><strong>Valor: </strong>R$ 3,00/kg</p>
-            </article>
-            <br>
-            <article>
-                <img src="./img/frutas-e-verduras/alface.webp" alt="Alface" width="200" height="200">
-                <h3>Alface</h3>
-                <p><strong>Descrição: </strong>Alface fresca e crocante.</p>
-                <p><strong>Valor: </strong>R$ 2,00/unidade</p>
-            </article>
+            <div id="carouselFrutas" class="carousel slide product-carousel" data-bs-ride="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/frutas-e-verduras/banana.webp" alt="Banana - fruta amarela em cacho, madura e pronta para consumo, rica em potássio e com casca amarela">
+                            <div class="product-info">
+                                <h3>Banana</h3>
+                                <p><strong>Descrição: </strong>Banana madura e fresca, rica em potássio e ideal para o consumo diário. Produto natural sem conservantes.</p>
+                                <p><strong>Valor: </strong>R$ 3,00/kg</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/frutas-e-verduras/alface.webp" alt="Alface - folhas verdes crocantes, frescas e higienizadas, com folhas bem verdes e sem manchas">
+                            <div class="product-info">
+                                <h3>Alface</h3>
+                                <p><strong>Descrição: </strong>Alface fresca e crocante, cultivada sem agrotóxicos. Ideal para saladas e sanduíches.</p>
+                                <p><strong>Valor: </strong>R$ 2,00/unidade</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/frutas-e-verduras/maca.png" alt="Maçã - fruta vermelha brilhante, madura e suculenta">
+                            <div class="product-info">
+                                <h3>Maçã</h3>
+                                <p><strong>Descrição: </strong>Maçã vermelha, fresca e suculenta. Rica em fibras e antioxidantes. Ideal para lanches saudáveis.</p>
+                                <p><strong>Valor: </strong>R$ 5,99/kg</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/frutas-e-verduras/tomate.png" alt="Tomate - fruto vermelho maduro, firme e suculento">
+                            <div class="product-info">
+                                <h3>Tomate</h3>
+                                <p><strong>Descrição: </strong>Tomate maduro, firme e suculento. Ideal para saladas, molhos e preparações culinárias diversas.</p>
+                                <p><strong>Valor: </strong>R$ 4,50/kg</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselFrutas" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselFrutas" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselFrutas" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselFrutas" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselFrutas" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselFrutas" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                </div>
+            </div>
         </section>
-
-        <hr>
 
         <!-- Produtos Alimentícios Não Perecíveis -->
-        <section id="produtos-alimenticios">
+        <section id="produtos-alimenticios" class="fade-in">
             <h2>Produtos Alimentícios Não Perecíveis</h2>
-            <article>
-                <img src="./img/produtos-alimenticios-nao-pereciveis/arroz-branco-tipo-1-camil.jpg" alt="Arroz" width="200" height="200">
-                <h3>Arroz 1kg</h3>
-                <p><strong>Descrição: </strong>Arroz branco tipo 1.</p>
-                <p><strong>Valor: </strong>R$ 5,50/kg</p>
-            </article>
-            <br>
-            <article>
-                <img src="./img/produtos-alimenticios-nao-pereciveis/feijao-carioca-camil.png" alt="Feijão" width="200" height="200">
-                <h3>Feijão</h3>
-                <p><strong>Descrição: </strong>Feijão carioca.</p>
-                <p><strong>Valor: </strong>R$ 7,00/kg</p>
-            </article>
+            <div id="carouselAlimentos" class="carousel slide product-carousel" data-bs-ride="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-alimenticios-nao-pereciveis/arroz-branco-tipo-1-camil.jpg" alt="Arroz branco tipo 1 em embalagem de 1kg, pacote selado com grãos de alta qualidade">
+                            <div class="product-info">
+                                <h3>Arroz 1kg</h3>
+                                <p><strong>Descrição: </strong>Arroz branco tipo 1, grãos selecionados de alta qualidade. Cozimento rápido e rendimento excelente.</p>
+                                <p><strong>Valor: </strong>R$ 5,50/kg</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-alimenticios-nao-pereciveis/feijao-carioca-camil.png" alt="Feijão carioca em embalagem de 1kg, pacote com grãos selecionados e uniformes">
+                            <div class="product-info">
+                                <h3>Feijão</h3>
+                                <p><strong>Descrição: </strong>Feijão carioca, grãos selecionados e de cozimento rápido. Rico em proteínas e fibras.</p>
+                                <p><strong>Valor: </strong>R$ 7,00/kg</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-alimenticios-nao-pereciveis/cafe.png" alt="Café torrado e moído em embalagem de 500g, pacote a vácuo">
+                            <div class="product-info">
+                                <h3>Café 500g</h3>
+                                <p><strong>Descrição: </strong>Café torrado e moído, embalado a vácuo. Aroma intenso e sabor equilibrado. Ideal para o dia a dia.</p>
+                                <p><strong>Valor: </strong>R$ 8,90/unidade</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-alimenticios-nao-pereciveis/macarrao.png" alt="Macarrão espaguete em embalagem de 500g, pacote transparente">
+                            <div class="product-info">
+                                <h3>Macarrão 500g</h3>
+                                <p><strong>Descrição: </strong>Macarrão espaguete de trigo durum. Cozimento rápido e textura al dente. Ideal para diversas receitas.</p>
+                                <p><strong>Valor: </strong>R$ 3,49/unidade</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselAlimentos" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselAlimentos" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselAlimentos" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselAlimentos" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselAlimentos" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselAlimentos" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                </div>
+            </div>
         </section>
-
-        <hr>
 
         <!-- Produtos de Higiene e Limpeza -->
-        <section id="produtos-de-higiene">
+        <section id="produtos-de-higiene" class="fade-in">
             <h2>Produtos de Higiene e Limpeza</h2>
-            <article>
-                <img src="./img/produtos-de-higiene-e-limpeza/sabonete-perfumado-lavanda-siene.png" alt="Sabonete" width="200" height="200">
-                <h3>Sabonete</h3>
-                <p><strong>Descrição: </strong>Sabonete perfumado.</p>
-                <p><strong>Valor: </strong>R$ 1,50/unidade</p>
-            </article>
-            <article>
-                <img src="./img/produtos-de-higiene-e-limpeza/detergente-neutro-500ml-ype.png" alt="Detergente" width="200" height="200">
-                <h3>Detergente</h3>
-                <p><strong>Descrição: </strong>Detergente líquido.</p>
-                <p><strong>Valor: </strong>R$ 2,50/unidade</p>
-            </article>
+            <div id="carouselHigiene" class="carousel slide product-carousel" data-bs-ride="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-de-higiene-e-limpeza/sabonete-perfumado-lavanda-siene.png" alt="Sabonete perfumado de lavanda em embalagem individual, formato retangular com cor roxa">
+                            <div class="product-info">
+                                <h3>Sabonete</h3>
+                                <p><strong>Descrição: </strong>Sabonete perfumado com fragrância de lavanda, hidratante e suave para a pele. Dermatologicamente testado.</p>
+                                <p><strong>Valor: </strong>R$ 1,50/unidade</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-de-higiene-e-limpeza/detergente-neutro-500ml-ype.png" alt="Detergente neutro em embalagem de 500ml, frasco transparente com líquido amarelo">
+                            <div class="product-info">
+                                <h3>Detergente</h3>
+                                <p><strong>Descrição: </strong>Detergente líquido neutro, eficiente na remoção de gorduras e suave para as mãos. Biodegradável.</p>
+                                <p><strong>Valor: </strong>R$ 2,50/unidade</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-de-higiene-e-limpeza/papel-higienico.png" alt="Papel higiênico em pacote com 24 rolos, embalagem plástica">
+                            <div class="product-info">
+                                <h3>Papel Higiênico</h3>
+                                <p><strong>Descrição: </strong>Papel higiênico folha dupla, pacote com 12 rolos. Macio, resistente e de alta qualidade.</p>
+                                <p><strong>Valor: </strong>R$ 15,90/pacote</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="product-card">
+                            <div class="offer-countdown">Carregando oferta...</div>
+                            <img src="./img/produtos-de-higiene-e-limpeza/desinfetante.png" alt="Desinfetante líquido em embalagem de 1L, frasco plástico colorido">
+                            <div class="product-info">
+                                <h3>Desinfetante</h3>
+                                <p><strong>Descrição: </strong>Desinfetante líquido com fragrância de lavanda. Elimina 99,9% das bactérias e deixa um agradável perfume.</p>
+                                <p><strong>Valor: </strong>R$ 6,90/unidade</p>
+                                <button class="btn">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHigiene" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHigiene" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselHigiene" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselHigiene" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselHigiene" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselHigiene" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                </div>
+            </div>
         </section>
 
-        <hr>
-
         <!-- Serviços -->
-        <section id="servicos">
+        <section id="servicos" class="fade-in">
             <h2>Serviços</h2>
-            <article>
-                <h3>Retirada no Local</h3>
-                <p><strong>Descrição: </strong>Retire seus produtos diretamente no minimercado.</p>
-                <p><strong>Valor: </strong>Gratuito</p>
-            </article>
-            <article>
-                <h3>Tele-Entrega</h3>
-                <p><strong>Descrição: </strong>Entregamos seus produtos no endereço indicado.</p>
-                <p><strong>Valor: </strong>R$ 10,00</p>
-            </article>
+            <div class="produtos-container">
+                <article>
+                    <i class="bi bi-shop" style="font-size: 5rem; display: block; text-align: center; margin-bottom: 1rem;" aria-hidden="true"></i>
+                    <h3>Retirada no Local</h3>
+                    <p><strong>Descrição: </strong>Retire seus produtos diretamente no minimercado, sem filas e com toda segurança. Disponível todos os dias das 8h às 20h.</p>
+                    <p><strong>Valor: </strong>Gratuito</p>
+                    <button class="btn pulse">Escolher este Serviço</button>
+                </article>
+                <article>
+                    <i class="bi bi-truck" style="font-size: 5rem; display: block; text-align: center; margin-bottom: 1rem;" aria-hidden="true"></i>
+                    <h3>Tele-Entrega</h3>
+                    <p><strong>Descrição: </strong>Entregamos seus produtos no endereço indicado, com rapidez e segurança. Entrega em até 2 horas para pedidos na região.</p>
+                    <p><strong>Valor: </strong>R$ 10,00</p>
+                    <button class="btn pulse">Escolher este Serviço</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Formulário de Cadastro -->
+        <section id="contato" class="fade-in">
+            <div class="form-container">
+                <h2 class="form-title">Cadastro de Cliente</h2>
+                <form id="cadastro-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo*</label>
+                            <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome completo" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF*</label>
+                            <input type="text" id="cpf" name="cpf" class="form-control" placeholder="000.000.000-00" required aria-required="true">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-mail*</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone*</label>
+                            <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(00) 00000-0000" required aria-required="true">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="endereco">Endereço Completo*</label>
+                        <input type="text" id="endereco" name="endereco" class="form-control" placeholder="Rua, número, bairro, cidade, estado" required aria-required="true">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Sexo</label>
+                            <div class="radio-group" role="radiogroup" aria-label="Sexo">
+                                <div class="radio-item">
+                                    <input type="radio" id="sexo-masculino" name="sexo" value="masculino">
+                                    <label for="sexo-masculino">Masculino</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="sexo-feminino" name="sexo" value="feminino">
+                                    <label for="sexo-feminino">Feminino</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="sexo-outro" name="sexo" value="outro">
+                                    <label for="sexo-outro">Outro</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Preferências de Contato</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="contato-email" name="contato" value="email">
+                                    <label for="contato-email">E-mail</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="contato-telefone" name="contato" value="telefone">
+                                    <label for="contato-telefone">Telefone</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="contato-whatsapp" name="contato" value="whatsapp">
+                                    <label for="contato-whatsapp">WhatsApp</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Serviço Desejado*</label>
+                        <div class="radio-group" role="radiogroup" aria-label="Serviço Desejado">
+                            <div class="radio-item">
+                                <input type="radio" id="servico-retirada" name="servico" value="retirada" required aria-required="true">
+                                <label for="servico-retirada">Retirada no Local</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="servico-entrega" name="servico" value="entrega" required aria-required="true">
+                                <label for="servico-entrega">Tele-Entrega</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Agendamento*</label>
+                        <div class="calendar-container">
+                            <table class="calendar" role="grid" aria-label="Calendário para agendamento"></table>
+                            <div class="time-slots" role="listbox" aria-label="Horários disponíveis"></div>
+                            <input type="hidden" id="selected-date" name="selected-date">
+                            <input type="hidden" id="selected-time" name="selected-time">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="observacoes">Observações</label>
+                        <textarea id="observacoes" name="observacoes" class="form-control" rows="3" placeholder="Alguma observação adicional?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="termos" name="termos" required aria-required="true">
+                            <label for="termos">Concordo com os termos e condições*</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Cadastrar</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Meus Agendamentos -->
+        <section id="meus-agendamentos" class="fade-in">
+            <h2>Meus Agendamentos</h2>
+            <div class="agendamentos-container">
+                <div class="agendamentos-lista">
+                    <div class="agendamentos-vazio">
+                        <p>Você ainda não possui agendamentos.</p>
+                    </div>
+                    <div id="agendamentos-cards" class="agendamentos-cards">
+                        <!-- Os cards de agendamento serão inseridos aqui via JavaScript -->
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     
-    <hr>
-
+    <!-- Modal de Edição de Agendamento -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Editar Agendamento</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-nome">Nome Completo*</label>
+                    <input type="text" id="edit-nome" name="edit-nome" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-servico">Serviço Desejado*</label>
+                    <select id="edit-servico" name="edit-servico" class="form-control" required>
+                        <option value="retirada">Retirada no Local</option>
+                        <option value="entrega">Tele-Entrega</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data e Hora*</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="date" id="edit-date" name="edit-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="edit-time" name="edit-time" class="form-control" required>
+                                <option value="">Selecione um horário</option>
+                                <option value="8:00">8:00</option>
+                                <option value="9:00">9:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-observacoes">Observações</label>
+                    <textarea id="edit-observacoes" name="edit-observacoes" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn">Salvar Alterações</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-edit">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
     <!-- Rodapé -->
     <footer>
-        <p>Desenvolvido por Emerson Felipe (@emersonfelipesp)</p>
-        <p>&copy; 2025 Minimercado Online. Todos os direitos reservados</p>
-        <nav>
-            <ul>
-                <li><a href="#frutas-e-verduras">Frutas e Verduras</a></li>
-                <li><a href="#produtos-alimenticios">Produtos Alimentícios</a></li>
-                <li><a href="#produtos-de-higiene">Produtos de Higiene</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <p>Desenvolvido por Emerson Felipe (@emersonfelipesp)</p>
+            <p>&copy; 2025 Minimercado Online. Todos os direitos reservados</p>
+            <nav aria-label="Navegação do rodapé">
+                <ul>
+                    <li><a href="#frutas-e-verduras">Frutas e Verduras</a></li>
+                    <li><a href="#produtos-alimenticios">Produtos Alimentícios</a></li>
+                    <li><a href="#produtos-de-higiene">Produtos de Higiene</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="#meus-agendamentos">Meus Agendamentos</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript personalizado -->
+    <script src="js/main.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/agendamentos.js"></script>
 </body>
 </html>
+
