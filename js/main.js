@@ -1,7 +1,6 @@
 // Espera o DOM ser carregado completamente
 document.addEventListener("DOMContentLoaded", () => {
-  // Inicializa o carrossel
-  initCarousel()
+  // O carrossel Bootstrap é inicializado automaticamente
 
   // Inicializa o calendário
   initCalendar()
@@ -18,68 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Exibe a hora atual
   updateClock()
   setInterval(updateClock, 1000)
+
+  // Inicializa o contador de ofertas
+  initOfferCountdown()
 })
-
-/**
- * Inicializa o carrossel de promoções
- */
-function initCarousel() {
-  const carousel = document.querySelector(".carousel")
-  if (!carousel) return
-
-  const carouselInner = carousel.querySelector(".carousel-inner")
-  const items = carousel.querySelectorAll(".carousel-item")
-  const prevBtn = carousel.querySelector(".carousel-control.prev")
-  const nextBtn = carousel.querySelector(".carousel-control.next")
-
-  let currentIndex = 0
-  const itemCount = items.length
-
-  // Configura o autoplay
-  let autoplayInterval = setInterval(nextSlide, 5000)
-
-  // Função para mostrar o slide atual
-  function showSlide(index) {
-    carouselInner.style.transform = `translateX(-${index * 100}%)`
-  }
-
-  // Função para ir para o próximo slide
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % itemCount
-    showSlide(currentIndex)
-  }
-
-  // Função para ir para o slide anterior
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + itemCount) % itemCount
-    showSlide(currentIndex)
-  }
-
-  // Adiciona os event listeners para os botões
-  if (prevBtn)
-    prevBtn.addEventListener("click", () => {
-      clearInterval(autoplayInterval)
-      prevSlide()
-      autoplayInterval = setInterval(nextSlide, 5000)
-    })
-
-  if (nextBtn)
-    nextBtn.addEventListener("click", () => {
-      clearInterval(autoplayInterval)
-      nextSlide()
-      autoplayInterval = setInterval(nextSlide, 5000)
-    })
-
-  // Pausa o autoplay quando o mouse está sobre o carrossel
-  carousel.addEventListener("mouseenter", () => {
-    clearInterval(autoplayInterval)
-  })
-
-  // Retoma o autoplay quando o mouse sai do carrossel
-  carousel.addEventListener("mouseleave", () => {
-    autoplayInterval = setInterval(nextSlide, 5000)
-  })
-}
 
 /**
  * Inicializa o calendário para agendamento
@@ -92,19 +33,75 @@ function initCalendar() {
   const timeSlots = calendarContainer.querySelector(".time-slots")
   const selectedDateInput = document.getElementById("selected-date")
   const selectedTimeInput = document.getElementById("selected-time")
+  const monthYearDisplay = document.createElement("div")
+  monthYearDisplay.className = "month-year-display"
+  calendarContainer.insertBefore(monthYearDisplay, calendar)
+
+  // Botões para navegar entre os meses
+  const prevMonthBtn = document.createElement("button")
+  prevMonthBtn.textContent = "< Mês Anterior"
+  prevMonthBtn.className = "btn btn-sm"
+  prevMonthBtn.setAttribute("aria-label", "Mês anterior")
+
+  const nextMonthBtn = document.createElement("button")
+  nextMonthBtn.textContent = "Próximo Mês >"
+  nextMonthBtn.className = "btn btn-sm"
+  nextMonthBtn.setAttribute("aria-label", "Próximo mês")
+
+  const monthNavigation = document.createElement("div")
+  monthNavigation.className = "month-navigation"
+  monthNavigation.appendChild(prevMonthBtn)
+  monthNavigation.appendChild(nextMonthBtn)
+  calendarContainer.insertBefore(monthNavigation, calendar)
 
   // Data atual
   const currentDate = new Date()
-  const currentMonth = currentDate.getMonth()
-  const currentYear = currentDate.getFullYear()
+  let currentMonth = currentDate.getMonth()
+  let currentYear = currentDate.getFullYear()
 
   // Gera o calendário para o mês atual
   generateCalendar(currentMonth, currentYear)
+
+  // Event listeners para os botões de navegação
+  prevMonthBtn.addEventListener("click", () => {
+    currentMonth--
+    if (currentMonth < 0) {
+      currentMonth = 11
+      currentYear--
+    }
+    generateCalendar(currentMonth, currentYear)
+  })
+
+  nextMonthBtn.addEventListener("click", () => {
+    currentMonth++
+    if (currentMonth > 11) {
+      currentMonth = 0
+      currentYear++
+    }
+    generateCalendar(currentMonth, currentYear)
+  })
 
   // Função para gerar o calendário
   function generateCalendar(month, year) {
     const firstDay = new Date(year, month, 1).getDay()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
+
+    // Atualiza o display do mês e ano
+    const monthNames = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ]
+    monthYearDisplay.textContent = `${monthNames[month]} ${year}`
 
     // Limpa o calendário
     calendar.innerHTML = ""
@@ -138,24 +135,37 @@ function initCalendar() {
 
           // Verifica se é uma data passada
           const cellDate = new Date(year, month, date)
-          if (cellDate < new Date(currentDate.setHours(0, 0, 0, 0))) {
+          const today = new Date()
+          today.setHours(0, 0, 0, 0)
+
+          if (cellDate < today) {
             cell.classList.add("disabled")
+            cell.setAttribute("aria-disabled", "true")
           } else {
+            cell.setAttribute("tabindex", "0")
+            cell.setAttribute("role", "button")
+            cell.setAttribute("aria-label", `${date} de ${monthNames[month]} de ${year}`)
+
             cell.addEventListener("click", function () {
-              // Remove a seleção anterior
-              const selectedCells = calendar.querySelectorAll(".selected")
-              selectedCells.forEach((cell) => cell.classList.remove("selected"))
-
-              // Adiciona a seleção atual
-              this.classList.add("selected")
-
-              // Atualiza o input oculto
-              const selectedDate = new Date(year, month, Number.parseInt(this.textContent))
-              selectedDateInput.value = selectedDate.toISOString().split("T")[0]
-
-              // Gera os horários disponíveis
-              generateTimeSlots()
+              selectDate(this, date, month, year)
             })
+
+            // Suporte para navegação por teclado
+            cell.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault()
+                selectDate(this, date, month, year)
+              }
+            })
+          }
+
+          // Destaca a data atual
+          if (
+            date === currentDate.getDate() &&
+            month === currentDate.getMonth() &&
+            year === currentDate.getFullYear()
+          ) {
+            cell.classList.add("today")
           }
         }
 
@@ -170,30 +180,90 @@ function initCalendar() {
     }
   }
 
+  // Função para selecionar uma data
+  function selectDate(cell, day, month, year) {
+    // Remove a seleção anterior
+    const selectedCells = calendar.querySelectorAll(".selected")
+    selectedCells.forEach((cell) => cell.classList.remove("selected"))
+
+    // Adiciona a seleção atual
+    cell.classList.add("selected")
+
+    // Atualiza o input oculto
+    const selectedDate = new Date(year, month, day)
+    selectedDateInput.value = selectedDate.toISOString().split("T")[0]
+
+    // Feedback visual
+    const feedbackElement = document.getElementById("date-feedback") || document.createElement("div")
+    feedbackElement.id = "date-feedback"
+    feedbackElement.className = "feedback-message"
+    feedbackElement.textContent = `Data selecionada: ${day}/${month + 1}/${year}`
+
+    if (!document.getElementById("date-feedback")) {
+      calendarContainer.insertBefore(feedbackElement, timeSlots)
+    }
+
+    // Gera os horários disponíveis
+    generateTimeSlots()
+  }
+
   // Função para gerar os horários disponíveis
   function generateTimeSlots() {
     // Limpa os horários anteriores
     timeSlots.innerHTML = ""
+
+    // Título para os horários
+    const title = document.createElement("h4")
+    title.textContent = "Horários Disponíveis"
+    timeSlots.appendChild(title)
 
     // Horários disponíveis (das 8h às 18h, de hora em hora)
     for (let hour = 8; hour <= 18; hour++) {
       const slot = document.createElement("div")
       slot.classList.add("time-slot")
       slot.textContent = `${hour}:00`
+      slot.setAttribute("tabindex", "0")
+      slot.setAttribute("role", "button")
+      slot.setAttribute("aria-label", `Horário ${hour} horas`)
 
       slot.addEventListener("click", function () {
-        // Remove a seleção anterior
-        const selectedSlots = timeSlots.querySelectorAll(".selected")
-        selectedSlots.forEach((slot) => slot.classList.remove("selected"))
+        selectTimeSlot(this)
+      })
 
-        // Adiciona a seleção atual
-        this.classList.add("selected")
-
-        // Atualiza o input oculto
-        selectedTimeInput.value = this.textContent
+      // Suporte para navegação por teclado
+      slot.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          selectTimeSlot(this)
+        }
       })
 
       timeSlots.appendChild(slot)
+    }
+  }
+
+  // Função para selecionar um horário
+  function selectTimeSlot(slot) {
+    // Remove a seleção anterior
+    const selectedSlots = timeSlots.querySelectorAll(".selected")
+    selectedSlots.forEach((slot) => slot.classList.remove("selected"))
+
+    // Adiciona a seleção atual
+    slot.classList.add("selected")
+
+    // Atualiza o input oculto
+    selectedTimeInput.value = slot.textContent
+
+    // Feedback visual
+    const feedbackElement = document.getElementById("time-feedback") || document.createElement("div")
+    feedbackElement.id = "time-feedback"
+    feedbackElement.className = "feedback-message"
+    feedbackElement.textContent = `Horário selecionado: ${slot.textContent}`
+
+    if (!document.getElementById("time-feedback")) {
+      timeSlots.appendChild(feedbackElement)
+    } else {
+      timeSlots.appendChild(feedbackElement)
     }
   }
 }
@@ -205,18 +275,35 @@ function initAccessibility() {
   // Botão de alto contraste
   const contrastBtn = document.getElementById("contrast-toggle")
   if (contrastBtn) {
-    contrastBtn.addEventListener("click", () => {
+    contrastBtn.addEventListener("click", function () {
       document.body.classList.toggle("high-contrast")
 
-      // Salva a preferência no localStorage
+      // Atualiza o aria-pressed
       const isHighContrast = document.body.classList.contains("high-contrast")
+      this.setAttribute("aria-pressed", isHighContrast)
+
+      // Salva a preferência no localStorage
       localStorage.setItem("high-contrast", isHighContrast)
+
+      // Anuncia a mudança para leitores de tela
+      const announcement = document.getElementById("accessibility-announcement") || document.createElement("div")
+      announcement.id = "accessibility-announcement"
+      announcement.className = "sr-only"
+      announcement.setAttribute("aria-live", "polite")
+      announcement.textContent = isHighContrast ? "Modo de alto contraste ativado" : "Modo de alto contraste desativado"
+
+      if (!document.getElementById("accessibility-announcement")) {
+        document.body.appendChild(announcement)
+      }
     })
 
     // Verifica se o usuário já tinha ativado o alto contraste anteriormente
     const savedContrast = localStorage.getItem("high-contrast")
     if (savedContrast === "true") {
       document.body.classList.add("high-contrast")
+      contrastBtn.setAttribute("aria-pressed", "true")
+    } else {
+      contrastBtn.setAttribute("aria-pressed", "false")
     }
   }
 
@@ -239,25 +326,46 @@ function initAccessibility() {
     increaseFontBtn.addEventListener("click", () => {
       if (currentFontSize < 150) {
         currentFontSize += 10
-        document.body.style.fontSize = `${currentFontSize}%`
-        localStorage.setItem("font-size", currentFontSize)
+        updateFontSize(currentFontSize)
       }
     })
 
     decreaseFontBtn.addEventListener("click", () => {
       if (currentFontSize > 70) {
         currentFontSize -= 10
-        document.body.style.fontSize = `${currentFontSize}%`
-        localStorage.setItem("font-size", currentFontSize)
+        updateFontSize(currentFontSize)
       }
     })
 
     resetFontBtn.addEventListener("click", () => {
       currentFontSize = 100
-      document.body.style.fontSize = `${currentFontSize}%`
-      localStorage.setItem("font-size", currentFontSize)
+      updateFontSize(currentFontSize)
     })
+
+    // Função para atualizar o tamanho da fonte
+    function updateFontSize(size) {
+      document.body.style.fontSize = `${size}%`
+      localStorage.setItem("font-size", size)
+
+      // Anuncia a mudança para leitores de tela
+      const announcement = document.getElementById("font-size-announcement") || document.createElement("div")
+      announcement.id = "font-size-announcement"
+      announcement.className = "sr-only"
+      announcement.setAttribute("aria-live", "polite")
+      announcement.textContent = `Tamanho da fonte alterado para ${size}%`
+
+      if (!document.getElementById("font-size-announcement")) {
+        document.body.appendChild(announcement)
+      }
+    }
   }
+
+  // Adiciona skip link para navegação rápida
+  const skipLink = document.createElement("a")
+  skipLink.href = "#main-content"
+  skipLink.className = "skip-link"
+  skipLink.textContent = "Pular para o conteúdo principal"
+  document.body.insertBefore(skipLink, document.body.firstChild)
 }
 
 /**
@@ -267,75 +375,167 @@ function initFormValidation() {
   const form = document.getElementById("cadastro-form")
   if (!form) return
 
+  // Adiciona validação em tempo real para os campos
+  const inputs = form.querySelectorAll("input, select, textarea")
+  inputs.forEach((input) => {
+    if (input.type !== "radio" && input.type !== "checkbox") {
+      input.addEventListener("blur", function () {
+        validateInput(this)
+      })
+    }
+  })
+
+  // Adiciona validação para os radio buttons
+  const radioGroups = form.querySelectorAll(".radio-group")
+  radioGroups.forEach((group) => {
+    const radios = group.querySelectorAll('input[type="radio"]')
+    radios.forEach((radio) => {
+      radio.addEventListener("change", function () {
+        validateRadioGroup(this.name)
+      })
+    })
+  })
+
   form.addEventListener("submit", (event) => {
     // Impede o envio do formulário se houver erros
     if (!validateForm()) {
       event.preventDefault()
+
+      // Foca no primeiro campo com erro
+      const firstError = form.querySelector(".error-message")
+      if (firstError) {
+        const errorInput = firstError.closest(".form-group").querySelector("input, select, textarea")
+        if (errorInput) {
+          errorInput.focus()
+        }
+      }
+
+      // Anuncia o erro para leitores de tela
+      const announcement = document.getElementById("form-error-announcement") || document.createElement("div")
+      announcement.id = "form-error-announcement"
+      announcement.className = "sr-only"
+      announcement.setAttribute("aria-live", "assertive")
+      announcement.textContent = "Há erros no formulário. Por favor, corrija-os antes de enviar."
+
+      if (!document.getElementById("form-error-announcement")) {
+        form.appendChild(announcement)
+      }
     } else {
       // Exibe uma mensagem de sucesso
       alert("Cadastro realizado com sucesso!")
+
+      // Limpa o formulário
+      form.reset()
+
+      // Limpa as mensagens de feedback
+      const feedbackMessages = document.querySelectorAll(".feedback-message")
+      feedbackMessages.forEach((message) => message.remove())
+
+      // Limpa as seleções do calendário
+      const selectedCells = document.querySelectorAll(".calendar .selected, .time-slots .selected")
+      selectedCells.forEach((cell) => cell.classList.remove("selected"))
+
+      // Limpa os inputs ocultos
+      document.getElementById("selected-date").value = ""
+      document.getElementById("selected-time").value = ""
     }
   })
 
-  // Função para validar o formulário
+  // Função para validar um input específico
+  function validateInput(input) {
+    const name = input.name
+    const value = input.value.trim()
+
+    switch (name) {
+      case "nome":
+        if (!value) {
+          showError(input, "Por favor, informe seu nome")
+          return false
+        }
+        break
+
+      case "cpf":
+        if (!value || !validateCPF(value)) {
+          showError(input, "Por favor, informe um CPF válido")
+          return false
+        }
+        break
+
+      case "email":
+        if (!value || !validateEmail(value)) {
+          showError(input, "Por favor, informe um e-mail válido")
+          return false
+        }
+        break
+
+      case "telefone":
+        if (!value || !validatePhone(value)) {
+          showError(input, "Por favor, informe um telefone válido")
+          return false
+        }
+        break
+
+      case "endereco":
+        if (!value) {
+          showError(input, "Por favor, informe seu endereço")
+          return false
+        }
+        break
+    }
+
+    // Se chegou até aqui, o campo é válido
+    clearError(input)
+    return true
+  }
+
+  // Função para validar um grupo de radio buttons
+  function validateRadioGroup(name) {
+    const radios = form.querySelectorAll(`input[name="${name}"]`)
+    const radioGroup = radios[0].closest(".radio-group")
+
+    let isChecked = false
+    radios.forEach((radio) => {
+      if (radio.checked) {
+        isChecked = true
+      }
+    })
+
+    if (!isChecked) {
+      showError(radioGroup, `Por favor, selecione uma opção`)
+      return false
+    }
+
+    clearError(radioGroup)
+    return true
+  }
+
+  // Função para validar todo o formulário
   function validateForm() {
     let isValid = true
 
-    // Validação do nome
-    const nome = document.getElementById("nome")
-    if (!nome.value.trim()) {
-      showError(nome, "Por favor, informe seu nome")
-      isValid = false
-    } else {
-      clearError(nome)
-    }
+    // Valida todos os inputs
+    const inputs = form.querySelectorAll("input, select, textarea")
+    inputs.forEach((input) => {
+      if (input.type !== "radio" && input.type !== "checkbox" && input.type !== "hidden") {
+        if (!validateInput(input)) {
+          isValid = false
+        }
+      }
+    })
 
-    // Validação do CPF
-    const cpf = document.getElementById("cpf")
-    if (!cpf.value.trim() || !validateCPF(cpf.value)) {
-      showError(cpf, "Por favor, informe um CPF válido")
-      isValid = false
-    } else {
-      clearError(cpf)
-    }
+    // Valida os radio buttons
+    const radioGroups = new Set()
+    form.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radioGroups.add(radio.name)
+    })
 
-    // Validação do e-mail
-    const email = document.getElementById("email")
-    if (!email.value.trim() || !validateEmail(email.value)) {
-      showError(email, "Por favor, informe um e-mail válido")
-      isValid = false
-    } else {
-      clearError(email)
-    }
+    radioGroups.forEach((name) => {
+      if (!validateRadioGroup(name)) {
+        isValid = false
+      }
+    })
 
-    // Validação do telefone
-    const telefone = document.getElementById("telefone")
-    if (!telefone.value.trim() || !validatePhone(telefone.value)) {
-      showError(telefone, "Por favor, informe um telefone válido")
-      isValid = false
-    } else {
-      clearError(telefone)
-    }
-
-    // Validação do endereço
-    const endereco = document.getElementById("endereco")
-    if (!endereco.value.trim()) {
-      showError(endereco, "Por favor, informe seu endereço")
-      isValid = false
-    } else {
-      clearError(endereco)
-    }
-
-    // Validação do serviço
-    const servico = document.querySelector('input[name="servico"]:checked')
-    if (!servico) {
-      showError(document.querySelector(".radio-group"), "Por favor, selecione um serviço")
-      isValid = false
-    } else {
-      clearError(document.querySelector(".radio-group"))
-    }
-
-    // Validação da data e hora
+    // Valida a data e hora
     const selectedDate = document.getElementById("selected-date")
     const selectedTime = document.getElementById("selected-time")
     if (!selectedDate.value || !selectedTime.value) {
@@ -343,6 +543,15 @@ function initFormValidation() {
       isValid = false
     } else {
       clearError(document.querySelector(".calendar-container"))
+    }
+
+    // Valida os termos
+    const termos = document.getElementById("termos")
+    if (!termos.checked) {
+      showError(termos.closest(".checkbox-item"), "Você precisa concordar com os termos e condições")
+      isValid = false
+    } else {
+      clearError(termos.closest(".checkbox-item"))
     }
 
     return isValid
@@ -358,12 +567,21 @@ function initFormValidation() {
     errorElement.style.fontSize = "0.875rem"
     errorElement.style.marginTop = "0.25rem"
     errorElement.textContent = message
+    errorElement.setAttribute("role", "alert")
 
     if (!formGroup.querySelector(".error-message")) {
       formGroup.appendChild(errorElement)
     }
 
-    input.style.borderColor = "red"
+    if (input.tagName === "INPUT" || input.tagName === "SELECT" || input.tagName === "TEXTAREA") {
+      input.style.borderColor = "red"
+      input.setAttribute("aria-invalid", "true")
+      input.setAttribute("aria-describedby", errorElement.id || `error-${input.name}`)
+
+      if (!errorElement.id) {
+        errorElement.id = `error-${input.name}`
+      }
+    }
   }
 
   // Função para limpar mensagem de erro
@@ -375,7 +593,11 @@ function initFormValidation() {
       formGroup.removeChild(errorElement)
     }
 
-    input.style.borderColor = ""
+    if (input.tagName === "INPUT" || input.tagName === "SELECT" || input.tagName === "TEXTAREA") {
+      input.style.borderColor = ""
+      input.removeAttribute("aria-invalid")
+      input.removeAttribute("aria-describedby")
+    }
   }
 
   // Função para validar CPF
@@ -432,9 +654,9 @@ function initFormValidation() {
       if (value.length > 9) {
         this.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
       } else if (value.length > 6) {
-        this.value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, "$1.$2.$3")
+        this.value = value.replace(/(\d{3})(\d{3})/, "$1.$2")
       } else if (value.length > 3) {
-        this.value = value.replace(/(\d{3})(\d{1,3})/, "$1.$2")
+        this.value = value.replace(/(\d{3})/, "$1")
       } else {
         this.value = value
       }
@@ -487,5 +709,36 @@ function updateClock() {
   const seconds = String(now.getSeconds()).padStart(2, "0")
 
   clockElement.textContent = `${hours}:${minutes}:${seconds}`
+}
+
+/**
+ * Inicializa o contador regressivo para ofertas
+ */
+function initOfferCountdown() {
+  const countdownElements = document.querySelectorAll(".offer-countdown")
+
+  countdownElements.forEach((element) => {
+    // Define um tempo aleatório para cada oferta (entre 1 e 24 horas)
+    const hours = Math.floor(Math.random() * 24) + 1
+    let totalSeconds = hours * 3600
+
+    // Atualiza o contador a cada segundo
+    const countdownInterval = setInterval(() => {
+      totalSeconds--
+
+      if (totalSeconds <= 0) {
+        clearInterval(countdownInterval)
+        element.textContent = "Oferta encerrada!"
+        element.classList.add("offer-ended")
+        return
+      }
+
+      const hoursLeft = Math.floor(totalSeconds / 3600)
+      const minutesLeft = Math.floor((totalSeconds % 3600) / 60)
+      const secondsLeft = totalSeconds % 60
+
+      element.textContent = `Oferta termina em: ${String(hoursLeft).padStart(2, "0")}:${String(minutesLeft).padStart(2, "0")}:${String(secondsLeft).padStart(2, "0")}`
+    }, 1000)
+  })
 }
 

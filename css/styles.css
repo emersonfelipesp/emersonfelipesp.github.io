@@ -1,11 +1,19 @@
 /* Estilos gerais */
 :root {
   --primary-color: #4caf50;
+  --primary-dark: #388e3c;
+  --primary-light: #c8e6c9;
   --secondary-color: #ff9800;
+  --secondary-dark: #f57c00;
+  --accent-color: #2196f3;
   --dark-color: #333;
-  --light-color: #f4f4f4;
+  --light-color: #f8f9fa;
+  --gray-color: #e9ecef;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -17,21 +25,63 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Skip link para acessibilidade */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
 }
 
 /* Cabeçalho */
 header {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
 header h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+header p {
+  font-size: 1.2rem;
   margin-bottom: 1rem;
-  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+#clock {
+  background-color: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
@@ -39,35 +89,61 @@ nav ul {
   justify-content: center;
   list-style: none;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 nav ul li {
-  margin: 0 1rem;
+  margin: 0 0.5rem;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-nav ul li a:hover {
-  color: var(--light-color);
-  text-decoration: underline;
+nav ul li a:hover,
+nav ul li a:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
 /* Seções de produtos */
 section {
-  padding: 2rem;
-  margin: 1rem 0;
+  padding: 3rem 1rem;
+  margin: 2rem 0;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 section h2 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+section h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+  border-radius: 2px;
 }
 
 .produtos-container {
@@ -79,16 +155,20 @@ section h2 {
 
 article {
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
   width: 300px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: var(--transition);
+  position: relative;
+  border: 1px solid var(--gray-color);
 }
 
-article:hover {
+article:hover,
+article:focus-within {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-light);
 }
 
 article img {
@@ -96,79 +176,179 @@ article img {
   height: 200px;
   object-fit: cover;
   border-radius: 5px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 article h3 {
-  color: var(--dark-color);
-  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 article p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Carrossel */
-.carousel {
-  margin: 2rem auto;
-  max-width: 800px;
+.offer-countdown {
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+  color: white;
+  padding: 0.75rem;
+  font-weight: bold;
+  text-align: center;
   position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offer-ended {
+  background: linear-gradient(135deg, var(--danger-color), #c82333);
+}
+
+/* Carrossel Bootstrap personalizado */
+#carouselPromocoes {
+  margin: 2rem auto 3rem;
+  max-width: 900px;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
 }
 
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.carousel-item {
-  min-width: 100%;
-  position: relative;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: 400px;
+#carouselPromocoes .carousel-item img {
+  height: 450px;
   object-fit: cover;
 }
 
-.carousel-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+#carouselPromocoes .carousel-caption {
   background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 1rem;
-  text-align: center;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  bottom: 20px;
+  left: 10%;
+  right: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.carousel-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  cursor: pointer;
+#carouselPromocoes .carousel-caption h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+#carouselPromocoes .carousel-caption p {
+  font-size: 1.1rem;
+}
+
+/* Carrosséis de produtos */
+.product-carousel {
+  margin: 2rem auto;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: white;
+  padding: 2rem;
+}
+
+.product-carousel .carousel-inner {
+  padding: 1rem 0;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
-.carousel-control.prev {
-  left: 10px;
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-control.next {
-  right: 10px;
+.product-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--gray-color);
+}
+
+.product-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h3 {
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.product-info p {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.product-info .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.product-carousel .carousel-control-prev,
+.product-carousel .carousel-control-next {
+  width: 10%;
+  opacity: 0.8;
+}
+
+.product-carousel .carousel-control-prev-icon,
+.product-carousel .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 1.5rem;
+}
+
+.product-carousel .carousel-indicators {
+  bottom: -10px;
+}
+
+.product-carousel .carousel-indicators button {
+  background-color: var(--primary-color);
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+/* Ajustes para acessibilidade */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Estilo para alto contraste */
+.high-contrast #carouselPromocoes .carousel-caption {
+  background-color: black;
+  color: yellow;
+  border: 1px solid yellow;
+}
+
+.high-contrast #carouselPromocoes .carousel-control-prev-icon,
+.high-contrast #carouselPromocoes .carousel-control-next-icon {
+  filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(0deg);
 }
 
 /* Formulário */
@@ -176,15 +356,17 @@ article p {
   max-width: 800px;
   margin: 2rem auto;
   background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .form-title {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
   text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .form-group {
@@ -194,15 +376,17 @@ article p {
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  font-weight: 600;
+  color: var(--dark-color);
 }
 
 .form-control {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 1rem;
+  transition: var(--transition);
 }
 
 .form-control:focus {
@@ -214,7 +398,8 @@ article p {
 .form-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-row .form-group {
@@ -226,6 +411,7 @@ article p {
   display: flex;
   gap: 1.5rem;
   margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .radio-item,
@@ -237,62 +423,113 @@ article p {
 
 .btn {
   display: inline-block;
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: var(--transition);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.btn:hover {
-  background-color: #3e8e41;
+.btn:hover,
+.btn:focus {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
 }
 
 .btn-secondary {
-  background-color: var(--secondary-color);
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
 }
 
-.btn-secondary:hover {
-  background-color: #e68a00;
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger-color), #c82333);
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background: linear-gradient(135deg, #c82333, var(--danger-color));
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
 }
 
 /* Calendário */
 .calendar-container {
   margin-top: 1rem;
+  background-color: var(--light-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.month-year-display {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+}
+
+.month-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
 .calendar {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .calendar th,
 .calendar td {
-  padding: 0.5rem;
+  padding: 0.75rem;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
 }
 
 .calendar th {
   background-color: var(--primary-color);
   color: white;
+  font-weight: 600;
 }
 
 .calendar td {
   cursor: pointer;
+  transition: var(--transition);
 }
 
-.calendar td:hover {
-  background-color: #f0f0f0;
+.calendar td:hover:not(.disabled) {
+  background-color: var(--primary-light);
+}
+
+.calendar td:focus:not(.disabled) {
+  outline: 2px solid var(--primary-color);
+  background-color: var(--primary-light);
 }
 
 .calendar .selected {
   background-color: var(--primary-color);
   color: white;
+  font-weight: bold;
 }
 
 .calendar .disabled {
@@ -300,56 +537,246 @@ article p {
   cursor: not-allowed;
 }
 
+.calendar .today {
+  font-weight: bold;
+  border: 2px solid var(--primary-color);
+}
+
 .time-slots {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .time-slot {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
+  transition: var(--transition);
+  background-color: white;
 }
 
-.time-slot:hover {
-  background-color: #f0f0f0;
+.time-slot:hover,
+.time-slot:focus {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+  outline: none;
 }
 
 .time-slot.selected {
   background-color: var(--primary-color);
   color: white;
+  border-color: var(--primary-dark);
+  font-weight: bold;
+}
+
+.feedback-message {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #e8f5e9;
+  border-radius: var(--border-radius);
+  color: var(--primary-dark);
+  font-weight: bold;
+  border-left: 4px solid var(--primary-color);
+}
+
+/* Agendamentos */
+.agendamentos-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.agendamentos-vazio {
+  text-align: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px dashed #ddd;
+}
+
+.agendamentos-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.agendamento-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  transition: var(--transition);
+  border: 1px solid var(--gray-color);
+}
+
+.agendamento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-light);
+}
+
+.agendamento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.agendamento-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+.agendamento-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.agendamento-info {
+  margin-bottom: 1rem;
+}
+
+.agendamento-info p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.agendamento-info strong {
+  font-weight: bold;
+  color: var(--dark-color);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  position: relative;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+  transition: var(--transition);
+}
+
+.close-modal:hover {
+  color: var(--dark-color);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 /* Rodapé */
 footer {
-  background-color: var(--dark-color);
+  background: linear-gradient(135deg, var(--dark-color), #222);
   color: white;
   text-align: center;
-  padding: 2rem 0;
-  margin-top: 2rem;
+  padding: 3rem 0;
+  margin-top: 3rem;
 }
 
 footer p {
   margin-bottom: 1rem;
+  opacity: 0.9;
 }
 
 footer nav ul {
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 footer nav ul li a {
   color: #ddd;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+footer nav ul li a:hover,
+footer nav ul li a:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 /* Responsividade */
+@media (max-width: 992px) {
+  #carouselPromocoes .carousel-item img {
+    height: 350px;
+  }
+
+  .product-card img {
+    height: 250px;
+  }
+}
+
 @media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
   nav ul {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
+  }
+
+  nav ul li {
+    margin: 0;
+  }
+
+  nav ul li a {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  #carouselPromocoes .carousel-item img {
+    height: 300px;
+  }
+
+  .product-card img {
+    height: 200px;
   }
 
   .form-row {
@@ -357,8 +784,49 @@ footer nav ul li a {
     gap: 0;
   }
 
-  .carousel-item img {
-    height: 300px;
+  .radio-group,
+  .checkbox-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-content {
+    margin: 20% auto;
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  section {
+    padding: 2rem 1rem;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #carouselPromocoes .carousel-item img {
+    height: 250px;
+  }
+
+  .product-card img {
+    height: 180px;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+
+  .calendar th,
+  .calendar td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .time-slot {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -382,21 +850,51 @@ footer nav ul li a {
 
 .high-contrast header,
 .high-contrast footer {
-  background-color: black;
+  background: black;
   color: yellow;
+  border-bottom: 2px solid yellow;
 }
 
 .high-contrast a {
   color: yellow;
 }
 
-.high-contrast article {
+.high-contrast article,
+.high-contrast section,
+.high-contrast .product-card,
+.high-contrast .form-container,
+.high-contrast .calendar-container,
+.high-contrast .modal-content {
   background-color: black;
   color: yellow;
   border: 1px solid yellow;
 }
 
 .high-contrast .btn {
+  background: yellow;
+  color: black;
+  border: 1px solid black;
+}
+
+.high-contrast .form-control {
+  background-color: black;
+  color: yellow;
+  border: 1px solid yellow;
+}
+
+.high-contrast .calendar th {
+  background-color: black;
+  color: yellow;
+  border: 1px solid yellow;
+}
+
+.high-contrast .calendar td {
+  background-color: black;
+  color: yellow;
+  border: 1px solid yellow;
+}
+
+.high-contrast .calendar .selected {
   background-color: yellow;
   color: black;
 }
@@ -406,20 +904,53 @@ footer nav ul li a {
   top: 10px;
   right: 10px;
   background-color: white;
-  padding: 0.5rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   z-index: 1000;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .font-size-controls button {
-  margin: 0 0.25rem;
-  padding: 0.25rem 0.5rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: var(--transition);
+}
+
+.font-size-controls button:hover,
+.font-size-controls button:focus {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.read-aloud-btn {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.read-aloud-btn:hover,
+.read-aloud-btn:focus {
+  background-color: var(--primary-dark);
+  transform: scale(1.1);
+  outline: none;
 }
 
 /* Animações */
@@ -449,5 +980,21 @@ footer nav ul li a {
 
 .slide-in {
   animation: slideIn 0.5s ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
 }
 
