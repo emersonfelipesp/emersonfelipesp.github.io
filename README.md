@@ -48,7 +48,6 @@ I'm actively involved in the NetBox ecosystem, building plugins and tools to enh
 
 - **[netbox-cli](https://github.com/emersonfelipesp/netbox-cli)** - API-first NetBox client for your terminal with CLI commands and interactive TUI
 - **[netbox-proxbox](https://github.com/emersonfelipesp/netbox-proxbox)** - NetBox Plugin for integration between Proxmox and NetBox
-- **[netbox-qrcode](https://github.com/emersonfelipesp/netbox-qrcode)** - NetBox Plugin to generate QR Codes for assets
 - **[proxbox-api](https://github.com/emersonfelipesp/proxbox-api)** - Backend API using FastAPI for NetBox Proxbox Plugin
 
 ### 🌐 Network Tools
@@ -77,7 +76,7 @@ I'm actively involved in the NetBox ecosystem, building plugins and tools to enh
 ## 💼 Professional
 
 - 🏢 Currently working at **[@N-Multifibra](https://github.com/N-Multifibra)**
-- 📧 Reach me at: [emerson.felipe@nmultifibra.com.br](mailto:emerson.felipe@nmultifibra.com.br)
+- 📧 Reach me at: [emerson@netdevopsbr.com](mailto:emerson@netdevopsbr.com)
 - 🌐 Website: [emersonfelipesp.com](https://emersonfelipesp.com)
 
 ---
