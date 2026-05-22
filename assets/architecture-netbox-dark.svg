@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="960" viewBox="0 0 1100 960" role="img" aria-label="emersonfelipesp · how my projects fit together">
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="4" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 2 L4 7 L7 2" fill="none" stroke="#768390" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-in" viewBox="0 0 8 8" refX="4" refY="2" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M1 6 L4 1 L7 6" fill="none" stroke="#768390" stroke-opacity="0.5" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .mono { font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1100" height="960" fill="#0d1117"/>
+  <rect x="0.5" y="0.5" width="1099" height="959" fill="none" stroke="#373e47"/>
+
+  <!-- Title strip -->
+  <rect x="0" y="0" width="1100" height="44" fill="#1c2128"/>
+  <line x1="0" y1="44" x2="1100" y2="44" stroke="#373e47"/>
+  <text class="mono" x="16" y="27" fill="#768390" font-size="12">emersonfelipesp · // how my projects fit together</text>
+  <text class="mono" x="1084" y="27" fill="#768390" font-size="11" text-anchor="end">netbox-dark</text>
+
+  <!-- ============ LEVEL 1: netbox (highlight) ============ -->
+  <rect x="460" y="78" width="180" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="550" y="103" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5" font-weight="bold">netbox</tspan><tspan fill="#768390" font-size="11"> · source of truth</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- Plugin fork connector: netbox → 5 plugins -->
+  <line x1="550" y1="118" x2="550" y2="148" stroke="#768390" stroke-width="1"/>
+  <line x1="130" y1="148" x2="970" y2="148" stroke="#768390" stroke-width="1"/>
+  <line x1="130" y1="148" x2="130" y2="186" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="330" y1="148" x2="330" y2="186" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="550" y1="148" x2="550" y2="186" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="770" y1="148" x2="770" y2="186" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="970" y1="148" x2="970" y2="186" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <text class="mono" x="550" y="142" text-anchor="middle" font-size="10" fill="#768390" fill-opacity="0.7" letter-spacing="1">PLUGIN</text>
+
+  <!-- ============ LEVEL 2: 5 plugin row ============ -->
+  <!-- netbox-ceph -->
+  <rect x="40" y="196" width="180" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="130" y="221" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5">netbox-ceph</tspan><tspan fill="#768390" font-size="11"> plugin</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- netbox-pbs -->
+  <rect x="240" y="196" width="180" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="330" y="221" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5">netbox-pbs</tspan><tspan fill="#768390" font-size="11"> plugin</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- netbox-proxbox (featured base) -->
+  <rect x="440" y="196" width="220" height="40" fill="#539bf5" fill-opacity="0.10" stroke="#539bf5"/>
+  <text class="mono" x="550" y="221" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5" font-weight="bold">netbox-proxbox</tspan><tspan fill="#768390" font-size="11"> base plugin</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- netbox-pdm -->
+  <rect x="680" y="196" width="180" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="770" y="221" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5">netbox-pdm</tspan><tspan fill="#768390" font-size="11"> plugin</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- netbox-packer -->
+  <rect x="880" y="196" width="180" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="970" y="221" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5">netbox-packer</tspan><tspan fill="#768390" font-size="11"> plugin</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- ============ BASE EXTENDS (dashed connector, 4 outer → center) ============ -->
+  <line x1="130" y1="244" x2="130" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3"/>
+  <line x1="330" y1="244" x2="330" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3"/>
+  <line x1="770" y1="244" x2="770" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3"/>
+  <line x1="970" y1="244" x2="970" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3"/>
+  <line x1="130" y1="258" x2="970" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3"/>
+  <!-- arrowheads converging to proxbox center at (550, 258) -->
+  <line x1="200" y1="258" x2="540" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+  <line x1="900" y1="258" x2="560" y2="258" stroke="#768390" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+  <text class="mono" x="550" y="276" text-anchor="middle" font-size="10" fill="#768390" fill-opacity="0.4" letter-spacing="1">BASE</text>
+
+  <!-- ============ API FUNNEL: 5 plugins → proxbox-api ============ -->
+  <line x1="130" y1="292" x2="130" y2="318" stroke="#768390" stroke-width="1"/>
+  <line x1="330" y1="292" x2="330" y2="318" stroke="#768390" stroke-width="1"/>
+  <line x1="550" y1="292" x2="550" y2="318" stroke="#768390" stroke-width="1"/>
+  <line x1="770" y1="292" x2="770" y2="318" stroke="#768390" stroke-width="1"/>
+  <line x1="970" y1="292" x2="970" y2="318" stroke="#768390" stroke-width="1"/>
+  <line x1="130" y1="318" x2="970" y2="318" stroke="#768390" stroke-width="1"/>
+  <line x1="550" y1="318" x2="550" y2="362" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <text class="mono" x="550" y="338" text-anchor="middle" font-size="11" fill="#768390" letter-spacing="1">HTTP REST · SSE · WEBSOCKET</text>
+  <text class="mono" x="550" y="354" text-anchor="middle" font-size="10" fill="#768390" fill-opacity="0.75" letter-spacing="0.5">auth: X-Proxbox-API-Key</text>
+
+  <!-- ============ LEVEL 3: proxbox-api (highlight) ============ -->
+  <rect x="430" y="378" width="240" height="44" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="550" y="405" text-anchor="middle" font-size="14">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5" font-weight="bold">proxbox-api</tspan><tspan fill="#768390" font-size="11"> :8000 · FastAPI</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- SDK fork: proxbox-api → netbox-sdk + proxmox-sdk -->
+  <line x1="550" y1="422" x2="550" y2="448" stroke="#768390" stroke-width="1"/>
+  <line x1="330" y1="448" x2="770" y2="448" stroke="#768390" stroke-width="1"/>
+  <line x1="330" y1="448" x2="330" y2="486" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="770" y1="448" x2="770" y2="486" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Fork labels -->
+  <text class="mono" x="330" y="478" text-anchor="middle" font-size="10" fill="#768390" letter-spacing="1">WRITE TARGET</text>
+  <text class="mono" x="770" y="478" text-anchor="middle" font-size="10" fill="#768390" letter-spacing="1">READ SOURCE</text>
+
+  <!-- ============ LEVEL 4: netbox-sdk + proxmox-sdk ============ -->
+  <rect x="220" y="496" width="220" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="330" y="521" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5">netbox-sdk</tspan><tspan fill="#768390" font-size="11"> 0.0.8.post1</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <rect x="660" y="496" width="220" height="40" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="770" y="521" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#539bf5">proxmox-sdk</tspan><tspan fill="#768390" font-size="11"> 0.0.5.post1</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- SDK → REST arrows -->
+  <line x1="330" y1="536" x2="330" y2="572" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <text class="mono" x="345" y="558" font-size="10" fill="#768390" letter-spacing="1">REST</text>
+  <line x1="770" y1="536" x2="770" y2="572" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <text class="mono" x="785" y="558" font-size="10" fill="#768390" letter-spacing="1">REST</text>
+
+  <!-- ============ LEVEL 5: netbox REST + Proxmox VE ============ -->
+  <rect x="220" y="582" width="220" height="40" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="330" y="607" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#adbac7">netbox · REST API</tspan><tspan fill="#768390" font-size="11"> 4.5.x / 4.6.x</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <rect x="660" y="582" width="220" height="40" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="770" y="607" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#adbac7">Proxmox VE</tspan><tspan fill="#768390" font-size="11"> 7.x / 8.x</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- Proxmox VE → 3-service fork -->
+  <line x1="770" y1="622" x2="770" y2="660" stroke="#768390" stroke-width="1"/>
+  <line x1="430" y1="660" x2="970" y2="660" stroke="#768390" stroke-width="1"/>
+  <line x1="430" y1="660" x2="430" y2="698" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="700" y1="660" x2="700" y2="698" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="970" y1="660" x2="970" y2="698" stroke="#768390" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ============ LEVEL 6: 3 Proxmox service APIs ============ -->
+  <rect x="340" y="708" width="180" height="40" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="430" y="733" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#adbac7">proxmox · ceph</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <rect x="610" y="708" width="180" height="40" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="700" y="733" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#adbac7">proxmox · PBS</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <rect x="880" y="708" width="180" height="40" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="970" y="733" text-anchor="middle" font-size="13">
+    <tspan fill="#768390">[ </tspan><tspan fill="#adbac7">proxmox · PDM</tspan><tspan fill="#768390"> ]</tspan>
+  </text>
+
+  <!-- ============ LEGEND ============ -->
+  <rect x="40" y="800" width="1020" height="118" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="56" y="822" fill="#768390" font-size="11" letter-spacing="0.5">LEGEND</text>
+
+  <!-- legend swatches -->
+  <rect x="56" y="836" width="14" height="14" fill="#539bf5" fill-opacity="0.10" stroke="#539bf5"/>
+  <text class="mono" x="78" y="847" fill="#adbac7" font-size="11">featured · base plugin extended by the others</text>
+
+  <rect x="56" y="858" width="14" height="14" fill="#161b22" stroke="#539bf5" stroke-opacity="0.7"/>
+  <text class="mono" x="78" y="869" fill="#adbac7" font-size="11">highlight · projects I own (netbox-proxbox, proxbox-api, netbox-sdk, proxmox-sdk, plus the four sibling plugins)</text>
+
+  <rect x="56" y="880" width="14" height="14" fill="#161b22" stroke="#373e47"/>
+  <text class="mono" x="78" y="891" fill="#adbac7" font-size="11">downstream · external REST APIs and service surfaces consumed by my projects</text>
+
+  <text class="mono" x="56" y="908" fill="#768390" fill-opacity="0.75" font-size="10">edges — solid: data path · dashed: "extends" (base relationship) · labels above arrows describe transport, auth, or role</text>
+
+  <!-- Footer caption -->
+  <text class="mono" x="16" y="940" fill="#768390" fill-opacity="0.7" font-size="10">netbox → 5 NetBox plugins (netbox-proxbox is the base) → proxbox-api (FastAPI :8000) → netbox-sdk / proxmox-sdk → REST APIs and Proxmox service surfaces</text>
+</svg>
