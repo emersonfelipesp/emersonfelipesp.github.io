@@ -1,5 +1,15 @@
 # 👋 Hi, I'm Emerson Felipe
 
+<p align="center">
+  <a href="https://emersonfelipesp.com">
+    <img
+      src="https://emersonfelipesp.github.io/assets/architecture-netbox-dark.svg"
+      alt="How my projects fit together: netbox → 5 NetBox plugins (netbox-proxbox base + netbox-ceph, netbox-pbs, netbox-pdm, netbox-packer) → proxbox-api (FastAPI :8000) → netbox-sdk / proxmox-sdk → NetBox REST API and Proxmox VE plus its Ceph / PBS / PDM service APIs"
+      width="900"
+    />
+  </a>
+</p>
+
 <div align="center">
   
 [![Website](https://img.shields.io/badge/Website-emersonfelipesp.com-blue?style=for-the-badge&logo=google-chrome)](https://emersonfelipesp.com)
