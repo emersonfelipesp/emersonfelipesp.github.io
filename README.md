@@ -3,7 +3,7 @@
 <p align="center">
   <a href="https://emersonfelipesp.com">
     <img
-      src="https://emersonfelipesp.github.io/assets/architecture-netbox-dark.svg?v=2"
+      src="https://emersonfelipesp.github.io/assets/architecture-netbox-dark.svg?v=3"
       alt="How my projects fit together: netbox → 5 NetBox plugins (netbox-proxbox base + netbox-ceph, netbox-pbs, netbox-pdm, netbox-packer) → proxbox-api (FastAPI :8000) → netbox-sdk / proxmox-sdk → NetBox REST API and Proxmox VE plus its Ceph / PBS / PDM service APIs"
       width="900"
     />
