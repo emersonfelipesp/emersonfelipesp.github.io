@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://emersonfelipesp.com">
     <img
-      src="https://emersonfelipesp.github.io/assets/architecture-netbox-dark.svg?v=5"
-      alt="How my projects fit together: netbox → 5 NetBox plugins (netbox-proxbox base + netbox-ceph, netbox-pbs, netbox-pdm, netbox-packer) → proxbox-api (FastAPI :8000) → netbox-sdk / proxmox-sdk → NetBox REST API and Proxmox VE plus its Ceph / PBS / PDM service APIs"
+      src="https://emersonfelipesp.github.io/assets/architecture-netbox-dark.svg?v=6"
+      alt="How my projects fit together: netbox → six NetBox plugins (Proxmox suite plus netbox-openbao) with netbox-openbao storing secrets in OpenBao KV v2 → proxbox-api → netbox-sdk / proxmox-sdk → NetBox REST API and Proxmox VE service APIs"
       width="900"
     />
   </a>
@@ -59,6 +59,7 @@ I'm actively involved in the NetBox ecosystem, building plugins and tools to enh
 - **[netbox-cli](https://github.com/emersonfelipesp/netbox-cli)** - API-first NetBox client for your terminal with CLI commands and interactive TUI
 - **[netbox-proxbox](https://github.com/emersonfelipesp/netbox-proxbox)** - NetBox Plugin for integration between Proxmox and NetBox
 - **[proxbox-api](https://github.com/emersonfelipesp/proxbox-api)** - Backend API using FastAPI for NetBox Proxbox Plugin
+- **[netbox-openbao](https://github.com/emersonfelipesp/netbox-openbao)** - NetBox plugin keeping secret material in OpenBao while NetBox owns credential inventory
 
 ### 🌐 Network Tools
 
