@@ -61,6 +61,23 @@ I'm actively involved in the NetBox ecosystem, building plugins and tools to enh
 - **[proxbox-api](https://github.com/emersonfelipesp/proxbox-api)** - Backend API using FastAPI for NetBox Proxbox Plugin
 - **[netbox-openbao](https://github.com/emersonfelipesp/netbox-openbao)** - NetBox plugin keeping secret material in OpenBao while NetBox owns credential inventory
 
+#### Proxmox OCI Testing Appliance
+
+The published [`emersonfelipesp/netbox-proxbox:oci`](https://hub.docker.com/r/emersonfelipesp/netbox-proxbox)
+image provides a disposable, all-in-one environment for testing NetBox Proxbox
+through Proxmox VE's **Pull from OCI Registry** workflow. It bundles NetBox,
+the stable `netbox-proxbox` plugin, proxbox-api, PostgreSQL, Redis, and a NetBox
+RQ worker. The multi-architecture image supports `linux/amd64` and
+`linux/arm64` and has been validated through a real Proxmox OCI-to-LXC pull.
+
+This appliance is for testing, not for production NetBox deployments. NetBox
+listens on TCP `8080`, persistent state must include all documented data and
+secret volumes, and the first administrator can be created from the LXC console
+with `/opt/netbox/netbox/manage.py createsuperuser`. See the
+[Proxmox OCI testing appliance guide](https://github.com/emersonfelipesp/netbox-proxbox/blob/develop/docs/installation/proxmox-oci-appliance.md)
+for the immutable tested image reference, persistence paths, security boundary,
+startup behavior, and runtime checks.
+
 ### 🌐 Network Tools
 
 - **[pynetbox-api](https://github.com/emersonfelipesp/pynetbox-api)** ⭐3 - FastAPI layer above pynetbox library
